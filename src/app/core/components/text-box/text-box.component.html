@@ -1,0 +1,13 @@
+<ng-container *ngIf="!!attributes && !!control">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="{{ attributes.label }}"
+      [formControl]="control"
+      type="{{ attributes.type }}"
+    />
+    <mat-error *ngIf="control.hasError('required')">
+      {{ attributes.label }} is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</ng-container>

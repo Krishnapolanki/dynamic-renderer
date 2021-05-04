@@ -1,0 +1,31 @@
+<div class="container">
+  <form class="create-form" (ngSubmit)="render()" [formGroup]="form">
+    <mat-form-field class="full-width">
+      <mat-label>Number of Fields</mat-label>
+      <input
+        matInput
+        formControlName="noOfFields"
+        placeholder="Choose number of fields required.(1 to 20 only)"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Choose Field Type</mat-label>
+      <mat-select
+        formControlName="typeOfField"
+        (selectionChange)="onTypeOfFieldChange($event)"
+      >
+        <mat-option *ngFor="let fieldType of fieldTypes" [value]="fieldType">
+          {{ fieldType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div [ngSwitch]="typeOfField">
+      <div *ngSwitchCase="'number'">{{ typeOfField }}</div>
+      <div *ngSwitchCase="'radio'">{{ typeOfField }}</div>
+      <div *ngSwitchCase="'date'">{{ typeOfField }}</div>
+      <div *ngSwitchCase="'checkbox'">{{ typeOfField }}</div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Render</button>
+  </form>
+</div>
