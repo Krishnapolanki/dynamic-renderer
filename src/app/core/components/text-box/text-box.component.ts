@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { TextBoxControl } from '../../models';
 
 @Component({
@@ -9,7 +9,7 @@ import { TextBoxControl } from '../../models';
 })
 export class TextBoxComponent implements OnInit {
   @Input() attributes!: TextBoxControl;
-  @Input() control!: FormControl;
+  @Input() control!: AbstractControl | null;
 
   constructor() {}
   ngOnInit(): void {}

@@ -15,17 +15,95 @@
         formControlName="typeOfField"
         (selectionChange)="onTypeOfFieldChange($event)"
       >
-        <mat-option *ngFor="let fieldType of fieldTypes" [value]="fieldType">
-          {{ fieldType }}
+        <mat-option
+          *ngFor="let fieldType of fieldTypes"
+          [value]="fieldType.value"
+        >
+          {{ fieldType.key }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div [ngSwitch]="typeOfField">
-      <div *ngSwitchCase="'number'">{{ typeOfField }}</div>
-      <div *ngSwitchCase="'radio'">{{ typeOfField }}</div>
-      <div *ngSwitchCase="'date'">{{ typeOfField }}</div>
-      <div *ngSwitchCase="'checkbox'">{{ typeOfField }}</div>
+    <div [ngSwitch]="typeOfField?.value">
+      <ng-container
+        *ngSwitchCase="'number'"
+        [ngTemplateOutlet]="inputControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      ></ng-container>
+      <ng-container
+        *ngSwitchCase="'text'"
+        [ngTemplateOutlet]="inputControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      ></ng-container>
+      <ng-container
+        *ngSwitchCase="'radio'"
+        [ngTemplateOutlet]="checkboxRadioControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      ></ng-container>
+      <ng-container
+        *ngSwitchCase="'checkbox'"
+        [ngTemplateOutlet]="checkboxRadioControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      >
+      </ng-container>
+      <ng-container
+        *ngSwitchCase="'date'"
+        [ngTemplateOutlet]="inputControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      ></ng-container>
+      <ng-container
+        *ngSwitchCase="'datetime-local'"
+        [ngTemplateOutlet]="inputControl"
+        [ngTemplateOutletContext]="{ controlConfig: controlConfig }"
+      ></ng-container>
     </div>
     <button mat-raised-button color="primary" type="submit">Render</button>
   </form>
 </div>
+<ng-template #inputControl let-config="controlConfig">
+  <div class="dynamic-controls" [formGroup]="config.formConfig">
+    <mat-form-field class="full-width">
+      <mat-label>Label to be displayed</mat-label>
+      <input matInput type="{{ config.type }}" formControlName="label" />
+    </mat-form-field>
+    <mat-form-field class="full-width" *ngIf="config.placeholderRequired">
+      <mat-label>Placeholder</mat-label>
+      <input matInput type="text" formControlName="placeHolder" />
+    </mat-form-field>
+    <mat-checkbox class="full-width" formControlName="isRequired"
+      >Required</mat-checkbox
+    >
+  </div>
+</ng-template>
+<ng-template #checkboxRadioControl let-config="controlConfig">
+  <div class="dynamic-controls" [formGroup]="config.formConfig">
+    <mat-form-field class="full-width">
+      <mat-label>Label to be displayed</mat-label>
+      <input matInput type="text" formControlName="label" />
+    </mat-form-field>
+    <button
+      mat-icon-button
+      color="primary"
+      type="button"
+      (click)="addOptions(config.formConfig.get('options'))"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <div class="chkbox-values">
+      <div
+        formArrayName="options"
+        *ngFor="let v of config.formConfig.get('options').controls; index as i"
+      >
+        <ng-container [formGroupName]="i">
+          <mat-form-field class="full-width">
+            <mat-label>Value {{ i + 1 }}</mat-label>
+            <input matInput type="text" formControlName="option" />
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </div>
+
+    <mat-checkbox class="full-width" formControlName="isRequired"
+      >Required</mat-checkbox
+    >
+  </div>
+</ng-template>

@@ -1,1 +1,8 @@
-<p>check-box works!</p>
+<div class="check-box-container" *ngIf="!!attributes">
+  <div>
+    <mat-label>{{ attributes.label }}</mat-label>
+  </div>
+  <div *ngFor="let option of attributes.optionsList">
+    <mat-checkbox>{{ option.option }}</mat-checkbox>
+  </div>
+</div>

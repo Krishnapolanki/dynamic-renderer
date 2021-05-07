@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CreateConfig } from './../../../core/models';
-import { TextBoxControl } from './../../../core/models/text-box-control.model';
+import { DynamicRenderViewModel } from './../../../core/models/dynamic-renderer-view.model';
 
+function* createCounter(from: number) {
+  for (let i = from; i > 0; i--) {
+    yield i;
+  }
+}
 @Component({
   selector: 'app-dynamic-renderer-shell',
   templateUrl: './dynamic-renderer-shell.component.html',
   styleUrls: ['./dynamic-renderer-shell.component.scss'],
 })
 export class DynamicRendererShellComponent implements OnInit {
-  metaInfo = new TextBoxControl({
-    label: 'Demo',
-    type: 'text',
-    value: 'Sample',
-    key: 'sampleText',
-  });
-  group: any = {};
-  constructor() {
-    this.group[this.metaInfo.key] = new FormControl(this.metaInfo.value);
-  }
+  configuration!: DynamicRenderViewModel;
+  count!: Generator<number>;
+  c!: number;
+  constructor() {}
 
   ngOnInit(): void {}
-  setConfiguration(data: CreateConfig) {}
+  setConfiguration(data: DynamicRenderViewModel) {
+    this.c = data.noOfFields;
+    this.configuration = data;
+    this.count = createCounter(this.configuration.noOfFields);
+  }
 }

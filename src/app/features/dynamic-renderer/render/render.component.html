@@ -1,1 +1,34 @@
-<p>render works!</p>
+<ng-container *ngIf="!!controlConfig">
+  <div [ngSwitch]="controlConfig?.typeOfField" [formGroup]="form">
+    <div *ngSwitchCase="'text'">
+      <cm-text-box
+        [attributes]="attributes"
+        [control]="this.form.get('text')"
+      ></cm-text-box>
+    </div>
+    <div *ngSwitchCase="'number'">
+      <cm-text-box
+        [attributes]="attributes"
+        [control]="this.form.get('text')"
+      ></cm-text-box>
+    </div>
+    <div *ngSwitchCase="'date'">
+      <cm-text-box
+        [attributes]="attributes"
+        [control]="this.form.get('text')"
+      ></cm-text-box>
+    </div>
+    <div *ngSwitchCase="'datetime-local'">
+      <cm-text-box
+        [attributes]="attributes"
+        [control]="this.form.get('text')"
+      ></cm-text-box>
+    </div>
+    <div *ngSwitchCase="'checkbox'">
+      <cm-check-box [attributes]="attributes"></cm-check-box>
+    </div>
+    <div *ngSwitchCase="'radio'">
+      <cm-radio-button [attributes]="attributes"></cm-radio-button>
+    </div>
+  </div>
+</ng-container>

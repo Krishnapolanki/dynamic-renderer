@@ -1,1 +1,8 @@
-<p>radio-button works!</p>
+<mat-radio-group aria-label="Select an option">
+  <mat-label>{{ attributes.label }}</mat-label>
+  <mat-radio-button
+    *ngFor="let o of attributes.optionsList"
+    value="{{ o.option }}"
+    >{{ o.option }}</mat-radio-button
+  >
+</mat-radio-group>
