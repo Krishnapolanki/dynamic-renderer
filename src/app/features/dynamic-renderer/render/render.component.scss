@@ -1,0 +1,14 @@
+.renderer-container {
+  display: flex;
+  flex-direction: column;
+
+  .render-form {
+    min-width: 1000px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}

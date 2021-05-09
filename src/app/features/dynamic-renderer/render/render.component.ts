@@ -55,4 +55,8 @@ export class RenderComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {}
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
 }

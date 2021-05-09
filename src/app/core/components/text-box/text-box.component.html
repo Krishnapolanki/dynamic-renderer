@@ -1,10 +1,12 @@
 <ng-container *ngIf="!!attributes && !!control">
-  <mat-form-field>
-    <mat-label>{{ attributes.label }}</mat-label>
-    <input
-      matInput
-      placeholder="{{ attributes.placeHolder }}"
-      type="{{ attributes.type }}"
-    />
-  </mat-form-field>
+  <form class="input-form">
+    <mat-form-field class="full-width">
+      <mat-label>{{ attributes.label }}</mat-label>
+      <input
+        matInput
+        placeholder="{{ attributes.placeHolder }}"
+        type="{{ attributes.type }}"
+      />
+    </mat-form-field>
+  </form>
 </ng-container>

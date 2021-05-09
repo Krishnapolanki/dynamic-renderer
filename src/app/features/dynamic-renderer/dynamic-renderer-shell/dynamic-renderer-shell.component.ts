@@ -1,11 +1,7 @@
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DynamicRenderViewModel } from './../../../core/models/dynamic-renderer-view.model';
 
-function* createCounter(from: number) {
-  for (let i = from; i > 0; i--) {
-    yield i;
-  }
-}
 @Component({
   selector: 'app-dynamic-renderer-shell',
   templateUrl: './dynamic-renderer-shell.component.html',
@@ -13,14 +9,21 @@ function* createCounter(from: number) {
 })
 export class DynamicRendererShellComponent implements OnInit {
   configuration!: DynamicRenderViewModel;
-  count!: Generator<number>;
-  c!: number;
-  constructor() {}
 
+  constructor() {}
   ngOnInit(): void {}
+
   setConfiguration(data: DynamicRenderViewModel) {
-    this.c = data.noOfFields;
     this.configuration = data;
-    this.count = createCounter(this.configuration.noOfFields);
+    this.counter(data?.noOfFields);
   }
+
+  counter(count: number): Array<number> {
+    let counter = [];
+    for (let i = 0; i < count; i++) {
+      counter.push(i);
+    }
+    return counter;
+  }
+  onSubmit() {}
 }

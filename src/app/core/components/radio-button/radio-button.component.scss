@@ -1,3 +1,15 @@
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+.rb-container {
+  display: flex;
+
+  .radio-label {
+    margin-right: 10%;
+  }
+  .radio-options {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    display: inline-flex;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
 }

@@ -1,12 +1,28 @@
 <div class="container">
-  <p>dynamic-renderer-shell works!</p>
-  <app-create (config)="setConfiguration($event)"></app-create>
-  <ng-container>
-    <ng-container>
-      <app-render
-        *ngFor="let i of count"
-        [controlConfig]="configuration"
-      ></app-render>
-    </ng-container>
-  </ng-container>
+  <p>Dynamic Renderer Application</p>
+  <section>
+    <app-create (config)="setConfiguration($event)"></app-create>
+  </section>
+
+  <section *ngIf="!!configuration" style="margin-top: 10px">
+    <form>
+      <ng-container>
+        <ng-container *ngFor="let n of counter(configuration.noOfFields)">
+          <app-render [controlConfig]="configuration"></app-render>
+        </ng-container>
+      </ng-container>
+
+      <button
+        type="button"
+        style="margin-top: 10px"
+        mat-raised-button
+        color="primary"
+      >
+        Submit Form
+      </button>
+    </form>
+  </section>
+  <section>
+    <div></div>
+  </section>
 </div>

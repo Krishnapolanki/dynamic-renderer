@@ -1,4 +1,15 @@
-.check-box-container {
+.ckb-container {
   display: flex;
-  flex-direction: row;
+
+  .ck-box-label {
+    margin-right: 10%;
+  }
+  .ck-box-options {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    display: inline-flex;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
 }

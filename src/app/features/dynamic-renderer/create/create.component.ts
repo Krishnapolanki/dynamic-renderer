@@ -54,6 +54,7 @@ export class CreateComponent implements OnInit {
 
   onTypeOfFieldChange(selectedOption: MatSelectChange) {
     this.addDynamicControls(selectedOption.value);
+    this.config.emit(undefined);
   }
 
   addDynamicControls(selectedField: string) {
